@@ -1,254 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pemilihan Ketua OSIS SMKN 1 Ampelgading</title>
-    <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-
-        /* Header */
-        header {
-            background-color: #2c3e50;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            margin-top: 5px;
-        }
-
-        /* Navigation */
-        nav {
-            background-color: #34495e;
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-        }
-
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        /* Sections */
-        section {
-            padding: 50px 0;
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
-        }
-
-        .candidate-list {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .candidate {
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 15px;
-            width: 200px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .candidate img {
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        form label {
-            font-size: 1.1rem;
-        }
-
-        form input, form select, form button {
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        form button {
-            background-color: #2ecc71;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        form button:hover {
-            background-color: #27ae60;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #2c3e50;
-            color: #fff;
-            text-align: center;
-            padding: 15px 0;
-            margin-top: 50px;
-        }
-
-        /* Responsive */
-        @media screen and (max-width: 768px) {
-            .candidate-list {
-                flex-direction: column;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>E-Voting OSIS - SMKN Ampelgading (Chart.js)</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Pemilihan Ketua OSIS</h1>
-            <p>SMKN 1 Ampelgading</p>
-        </div>
-    </header>
+  <header class="topbar">
+    <h1>EVoting Ketua OSIS - SMKN Ampelgading</h1>
+    <p class="subtitle">Versi visual — grafik realtime dengan Chart.js (simulasi, data di browser)</p>
+  </header>
 
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#candidates">Daftar Kandidat</a></li>
-            <li><a href="#vote">Formulir Pemilihan</a></li>
-            <li><a href="#results">Hasil Pemilihan</a></li>
-        </ul>
-    </nav>
-
-    <section id="home">
-        <div class="container">
-            <h2>Selamat datang di Pemilihan Ketua OSIS</h2>
-            <p>Pilihlah dengan bijak untuk menentukan ketua OSIS yang terbaik untuk SMKN 1 Ampelgading.</p>
-        </div>
+  <main class="main">
+    <section class="vote-panel">
+      <h2>Pilih Kandidat</h2>
+      <div id="candidates" class="grid"></div>
+      <div class="controls">
+        <button id="clearVoteBtn" class="btn secondary">Hapus status pilih (lokal)</button>
+        <button id="resetDataBtn" class="btn danger">Reset data contoh</button>
+      </div>
+      <p class="note">Setiap browser hanya boleh memilih 1x (simulasi dengan localStorage).</p>
     </section>
 
-    <section id="candidates">
-        <div class="container">
-            <h2>Daftar Kandidat Ketua OSIS</h2>
-            <div class="candidate-list">
-                <div class="candidate">
-                    <img src="https://via.placeholder.com/150" alt="Kandidat 1">
-                    <h3>Kandidat 1</h3>
-                    <p>Deskripsi Kandidat 1</p>
-                </div>
-                <div class="candidate">
-                    <img src="https://via.placeholder.com/150" alt="Kandidat 2">
-                    <h3>Kandidat 2</h3>
-                    <p>Deskripsi Kandidat 2</p>
-                </div>
-                <div class="candidate">
-                    <img src="https://via.placeholder.com/150" alt="Kandidat 3">
-                    <h3>Kandidat 3</h3>
-                    <p>Deskripsi Kandidat 3</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <aside class="chart-panel">
+      <h2>Hasil Pemilihan (Realtime)</h2>
+      <div class="stats">
+        <div>Total suara: <strong id="totalVotes">0</strong></div>
+        <div id="votedStatus" class="votedStatus">Belum memilih</div>
+      </div>
 
-    <section id="vote">
-        <div class="container">
-            <h2>Formulir Pemilihan</h2>
-            <form id="voteForm">
-                <label for="name">Nama:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="candidate">Pilih Kandidat:</label>
-                <select id="candidate" name="candidate" required>
-                    <option value="Kandidat 1">Kandidat 1</option>
-                    <option value="Kandidat 2">Kandidat 2</option>
-                    <option value="Kandidat 3">Kandidat 3</option>
-                </select>
+      <canvas id="resultsChart" width="400" height="300" aria-label="Grafik hasil pemilihan"></canvas>
 
-                <button type="submit">Kirim Suara</button>
-            </form>
-        </div>
-    </section>
+      <div id="listResults" class="list-results"></div>
+    </aside>
+  </main>
 
-    <section id="results">
-        <div class="container">
-            <h2>Hasil Pemilihan</h2>
-            <div id="resultsData">
-                <p>Belum ada hasil.</p>
-            </div>
-        </div>
-    </section>
+  <footer class="footer">
+    &copy; SMKN Ampelgading — Demo e-voting (localStorage). Untuk penggunaan nyata butuh backend & otentikasi.
+  </footer>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 SMKN 1 Ampelgading - Semua Hak Dilindungi</p>
-        </div>
-    </footer>
-
-    <script>
-        document.getElementById('voteForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            let name = document.getElementById('name').value;
-            let candidate = document.getElementById('candidate').value;
-
-            if (name && candidate) {
-                let resultsData = document.getElementById('resultsData');
-                resultsData.innerHTML = `<p>Terima kasih, ${name}! Suara Anda untuk ${candidate} telah diterima.</p>`;
-                
-                // Simulasi data hasil
-                setTimeout(() => {
-                    let resultText = `<p>Hasil Pemilihan: </p><ul>
-                        <li>Kandidat 1: 20 suara</li>
-                        <li>Kandidat 2: 15 suara</li>
-                        <li>Kandidat 3: 10 suara</li>
-                    </ul>`;
-                    resultsData.innerHTML = resultText;
-                }, 2000);
-            } else {
-                alert('Mohon isi semua field!');
-            }
-        });
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
